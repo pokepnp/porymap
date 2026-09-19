@@ -61,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
     isProgrammaticEventTabChange(false)
 {
     QCoreApplication::setOrganizationName("pret");
-    QCoreApplication::setApplicationName("porymap");
+    QCoreApplication::setApplicationName("porymap-pnp");
     QCoreApplication::setApplicationVersion(PORYMAP_VERSION);
     QApplication::setApplicationDisplayName(QApplication::applicationName());
     QApplication::setWindowIcon(QIcon(":/icons/porymap-icon-2.ico"));
