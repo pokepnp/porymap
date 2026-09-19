@@ -26,6 +26,7 @@ public:
         Normal,
         Covered,
         Split,
+        Top,
         Count
     };
 

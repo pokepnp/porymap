@@ -624,12 +624,15 @@ int MainWindow::getMetatileLayerType(int metatileId) {
     Metatile * metatile = this->getMetatile(metatileId);
     if (!metatile)
         return -1;
-    return metatile->layerType();
+    int layerType = metatile->layerType();
+    if (!projectConfig.tripleLayerMetatilesEnabled && layerType >= Metatile::LayerType::Top)
+        return -1;
+    return layerType;
 }
 
 void MainWindow::setMetatileLayerType(int metatileId, int layerType) {
     Metatile * metatile = this->getMetatile(metatileId);
-    if (!metatile)
+    if (!metatile || (!projectConfig.tripleLayerMetatilesEnabled && layerType >= Metatile::LayerType::Top))
         return;
     metatile->setLayerType(layerType);
     this->saveMetatileAttributesByMetatileId(metatileId);

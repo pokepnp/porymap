@@ -171,7 +171,7 @@ void Metatile::setLayout(Project * project) {
 
     // Validate layer type mask
     packer.setMask(layerTypeMask);
-    const uint32_t maxLayerType = Metatile::LayerType::Count - 1;
+    const uint32_t maxLayerType = (projectConfig.tripleLayerMetatilesEnabled) ? Metatile::LayerType::Count - 1 : Metatile::LayerType::Top - 1;
     if (layerTypeMask && packer.clamp(maxLayerType) != maxLayerType) {
         logWarn(QString("Metatile Layer Type mask '%1' is insufficient to contain all %2 available options.")
                             .arg(Util::toHexString(layerTypeMask))

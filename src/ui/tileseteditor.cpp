@@ -184,8 +184,22 @@ void TilesetEditor::initAttributesUi() {
             this->ui->comboBox_LayerType->setEnabled(false);
         }
     } else {
-        this->ui->frame_LayerType->setVisible(false);
-        this->ui->label_BottomTop->setText("Bottom/Middle/Top");
+        this->ui->comboBox_LayerType->addItem("Normal - Bottom/Middle/Top", Metatile::LayerType::Normal);
+        this->ui->comboBox_LayerType->addItem("Covered - Bottom/Middle",    Metatile::LayerType::Covered);
+        this->ui->comboBox_LayerType->addItem("Split - Bottom/Top",         Metatile::LayerType::Split);
+        this->ui->comboBox_LayerType->addItem("Top - Middle/Top",           Metatile::LayerType::Top);
+        this->ui->comboBox_LayerType->setEditable(false);
+        this->ui->comboBox_LayerType->setMinimumContentsLength(0);
+        if (!projectConfig.metatileLayerTypeMask) {
+            // User has triple layer metatiles, but no layer type attribute.
+            // Porymap is still using the layer type value to render metatiles, and with
+            // no mask set every metatile will be "Bottom/Middle/Top", so just display the combo
+            // box but prevent the user from changing the value.
+            this->ui->comboBox_LayerType->setEnabled(false);
+            this->ui->frame_LayerType->setVisible(false);
+            this->ui->label_BottomTop->setText("Bottom/Middle/Top");
+        }
+
     }
 
     // Raw attributes value
